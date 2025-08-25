@@ -1,1 +1,1 @@
-# Pro Py OCR
+# python practitioner
