@@ -5,7 +5,7 @@ import os
 
 pdf_path = "prot.pdf"
 output_txt = "endprot.txt"
-tesseract_cmd = r"C:\"
+tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 idioma = "eng"
 dpi = 300
 
