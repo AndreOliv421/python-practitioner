@@ -1,4 +1,4 @@
-from pdf2image import covert_from_path
+from pdf2image import convert_from_path
 from PIL import Image
 import pytesseract
 import os
@@ -20,6 +20,6 @@ for i, page in enumerate(pages, start=1):
     text = pytesseract.image_to_string(pages, lang=idioma)
     all_text.append(f"---Page {i} --\n{text}\n")
 
-with open(output_txt, "w" encoding="utf-8") as f: f.writelines(all_text)
+with open(output_txt, "w", encoding="utf-8") as f: f.writelines(all_text)
 
 print(f"Conversão concluida! Arquivo: '{output_txt}'")
