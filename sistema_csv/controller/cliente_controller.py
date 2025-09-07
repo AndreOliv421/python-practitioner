@@ -1,5 +1,5 @@
-from ..models.cliente import Cliente
-from ..database.database import BancoFake
+from models.cliente import Cliente
+from database.database import BancoFake
 
 class cliente_controller:
 
