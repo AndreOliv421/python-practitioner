@@ -13,7 +13,7 @@ def helloword():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template(index.html)
 
 # Inicia o servidor
 if __name__ == '__main__':
