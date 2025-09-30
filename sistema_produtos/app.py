@@ -33,20 +33,23 @@ def index():
             writer = csv.writer(arquivo)
             writer.writerow([nome, email, produto, quantidade])
 
+    registros = ler_registros()
+    return render_template("index.html", registros=registros)
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         usuario = request.form["usuario"]
         senha = request.form["senha"]
         if usuario == "admin" and senha == "123":
-            return render_template("index.html")
+            return redirect("/")
         else:
             return render_template("login.html")
         
     return render_template("login.html")
 
     registros = ler_registros()
-    return render_template("index.html", registros=registros)
+
 if __name__ == "__main__":
     inicializar_csv()
     app.run(debug=True)
