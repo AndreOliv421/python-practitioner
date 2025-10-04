@@ -1,15 +1,24 @@
 import pygame, sys, random
 
 pygame.init()
-
 # criando tela do jogo (x, y)
 screen = pygame.display.set_set_mode((400, 300))
 
-# posição inicial da bolinha
+# carrega imagem
+player_img = pygame.image.load("personagem.png")
 
+food_img = pygame.image.load(".png")
+
+food_img = pygame.image.load(".png")
+food_img = pygame.transform.scale(food_img, (20,20))
+
+
+
+# posicao inicial da bolinha
 x = 200
 y = 150
-raio = 20  
+tamanho = 40
+velocidade = 5
 
 # posição aleatorio da comida
 food_x = random.randint(20, 380) # meu limite é 400
@@ -38,27 +47,31 @@ while True:
         y -= 0.2
 
 # se x for menor que zero, colocamos do tamanho da bolinha
-if x < raio:
-    x = raio
+if x < 0:
+    x = 0
 # se x for maior que 400, colocamos menos o tamanho da bolinha
-if x > 400 - raio:
-    x = 400 - raio
-if y < raio:
-    y = raio
-if y > 300 - raio:
-    y = 300 - raio 
+if x > 400 - tamanho:
+    x = 400 - tamanho
+if y < 0:
+    y = 0
+if y > 300 - tamanho:
+    y = 300 - tamanho 
 
-# diferença da posição vertical e horizontal
-diferenca_x = x - food_x
-diferenca_y = y - food_y
+centro_player_x = x + tamanho / 2 
+centro_player_y = y + tamanho / 2
 
-# Quadrado das diferenças, ², para não termos numero negativos
+centro_food_x = food_x + 10
+centro_food_y = food_y + 10
+
+diferenca_x = centro_player_x - centro_food_x
+diferenca_y = centro_player_y - centro_food_y
+
 quadrado_x = diferenca_x ** 2
 quadrado_y = diferenca_y ** 2
 
+# soma dos quadrados
 soma_quadrados = quadrado_x + quadrado_y
-
-# Raiz quadrada da soma ( distancia final entre centros), 0.5
+# raiz da soma dos quadrados
 distancia = soma_quadrados ** 0.5
 
 if distancia < raio + 10: # se encostar ( o raio 10 é o tamanho da bolinha amarela )
@@ -71,12 +84,8 @@ if distancia < raio + 10: # se encostar ( o raio 10 é o tamanho da bolinha amar
 # pintar o fundo do jogo RGB (0, 0, 0)
 screen.fill((0, 0, 0))
 
-# desenhar um circulo vermelho, RGB (255, 0, 0)
-# cor RGB, posição x e y, com raio 20
-pygame.draw.circle(screen, (255, 0, 0, 0), (x, y), raio)
-
-# Bolinha amarela (food)
-pygame.draw.circle(screen, (255, 255, 0), (food_x, food_y), 10)
+screen.blit(food_img, (food_x, food_y))
+screen.blit(player_scaled, (x, y))
 
 # para trocar o frame do jogo
 pygame.display.flip()
